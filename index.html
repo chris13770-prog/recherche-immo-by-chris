@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123b32">
+<meta name="description" content="Recherche Immo by Chris : recherchez des annonces immobilières sur plusieurs sites depuis une seule interface.">
+<title>Recherche Immo by Chris</title>
+<style>
+:root{--green:#123b32;--green2:#1d6552;--bg:#f3f6f4;--ink:#18221f;--muted:#5c6964;--line:#dce5df;--white:#fff;--gold:#f0bd55}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:linear-gradient(135deg,var(--green),#1e5c4c);color:white;padding:25px 16px 30px}
+.wrap{width:min(100% - 28px,1050px);margin:auto}.brand{display:flex;align-items:center;gap:12px}.logo{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:#ffffff1c;font-size:27px}.brand h1{font-size:clamp(22px,4vw,32px);margin:0;line-height:1.2}.brand p{margin:4px 0 0;color:#d5e8df;font-size:14px}
+.hero{margin:22px 0 0;max-width:720px}.hero h2{font-size:clamp(24px,4vw,38px);line-height:1.12;margin:0 0 10px}.hero p{margin:0;color:#e1eee8}
+main{padding:22px 0 45px}.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 6px 20px #173b2b0b}.panel h2{font-size:20px;margin:0 0 16px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:13px}.field{grid-column:span 4;min-width:0}.field.wide{grid-column:span 6}.field.full{grid-column:1/-1}label{display:block;font-weight:700;font-size:14px;margin:0 0 6px}input,select{width:100%;min-height:47px;padding:10px 12px;border:1px solid #cbd7d0;border-radius:10px;background:#fff;color:var(--ink);font:inherit}input:focus,select:focus{outline:3px solid #1d655226;border-color:var(--green2)}
+.segment{display:flex;gap:8px}.segment label{flex:1;margin:0}.segment input{position:absolute;opacity:0;width:1px;height:1px}.segment span{display:flex;align-items:center;justify-content:center;min-height:45px;border:1px solid #cbd7d0;border-radius:10px;cursor:pointer;font-weight:700}.segment input:checked+span{background:var(--green);border-color:var(--green);color:white}
+.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:18px}.btn{border:0;border-radius:11px;min-height:48px;padding:12px 20px;font:inherit;font-weight:800;cursor:pointer}.btn.primary{background:var(--green);color:white}.btn.primary:hover{background:var(--green2)}.btn.secondary{background:#edf3ef;color:var(--green)}.btn:disabled{opacity:.55;cursor:wait}.hint{font-size:13px;color:var(--muted);margin:12px 0 0}
+.status{margin:18px 0 12px;padding:13px 15px;border-radius:12px;background:#eaf2ed;color:var(--green);font-weight:650}.status.error{background:#fff0ed;color:#8b2e1e}.results-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:20px 0 12px}.results-head h2{font-size:21px;margin:0}.count{font-size:14px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.result{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;display:flex;flex-direction:column;gap:9px;min-width:0}.result h3{font-size:17px;line-height:1.3;margin:0}.result h3 a{color:var(--green);text-decoration:none}.result h3 a:hover{text-decoration:underline}.meta{display:flex;gap:7px;flex-wrap:wrap}.pill{font-size:12px;background:#edf3ef;color:#38584a;padding:4px 8px;border-radius:99px}.snippet{font-size:14px;color:#4c5953;margin:0;overflow-wrap:anywhere}.result-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto;padding-top:7px}.source{font-size:12px;color:var(--muted)}.open{font-weight:800;color:var(--green2);text-decoration:none;white-space:nowrap}
+.empty{background:#fff;border:1px dashed #b9c9bf;border-radius:14px;padding:25px;text-align:center;color:var(--muted)}.empty strong{display:block;color:var(--ink);font-size:18px;margin-bottom:5px}
+footer{padding:20px 0 30px;color:var(--muted);font-size:12px}footer a{color:var(--green2)}
+@media(max-width:680px){.field,.field.wide{grid-column:span 6}.cards{grid-template-columns:1fr}.panel{padding:15px}.hero h2{max-width:560px}}
+@media(max-width:430px){.field,.field.wide{grid-column:1/-1}.actions .btn{width:100%}.brand h1{font-size:22px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand"><div class="logo" aria-hidden="true">⌂</div><div><h1>Recherche Immo by Chris</h1><p>Le portail de recherche immobilière multi-sites</p></div></div>
+  <div class="hero"><h2>Votre prochaine adresse commence ici.</h2><p>Une recherche, plusieurs sites immobiliers. Comparez les résultats et ouvrez l’annonce originale chez son éditeur.</p></div>
+</div></header>
+<main class="wrap">
+<section class="panel" aria-labelledby="search-title">
+<h2 id="search-title">Personnalisez votre recherche</h2>
+<form id="searchForm">
+<div class="grid">
+<div class="field full"><label>Votre projet</label><div class="segment">
+<label><input type="radio" name="transaction" value="location" checked><span>À louer</span></label>
+<label><input type="radio" name="transaction" value="achat"><span>À acheter</span></label>
+</div></div>
+<div class="field wide"><label for="city">Ville ou code postal</label><input id="city" name="city" value="Bellegarde" placeholder="Ex. Nîmes ou 30127" required maxlength="100"></div>
+<div class="field"><label for="radius">Rayon souhaité</label><select id="radius" name="radius"><option value="0">Ville uniquement (à préciser)</option><option value="5">5 km</option><option value="10">10 km</option><option value="15" selected>15 km</option><option value="20">20 km</option><option value="30">30 km</option><option value="50">50 km</option></select></div>
+<div class="field"><label for="kind">Type de bien</label><select id="kind" name="kind"><option value="tous">Tous les biens</option><option value="maison">Maison / villa</option><option value="appartement">Appartement</option><option value="terrain">Terrain</option><option value="immeuble">Immeuble</option></select></div>
+<div class="field"><label for="rooms">Nombre de pièces minimum</label><select id="rooms" name="rooms"><option value="">Indifférent</option><option value="1">1 pièce</option><option value="2">2 pièces</option><option value="3">3 pièces</option><option value="4">4 pièces</option><option value="5">5 pièces</option><option value="6">6 pièces ou plus</option></select></div>
+<div class="field"><label for="bedrooms">Chambres minimum</label><select id="bedrooms" name="bedrooms"><option value="">Indifférent</option><option value="1">1 chambre</option><option value="2">2 chambres</option><option value="3">3 chambres</option><option value="4">4 chambres</option><option value="5">5 chambres ou plus</option></select></div>
+<div class="field"><label for="minPrice">Budget minimum (€)</label><input id="minPrice" name="minPrice" type="number" min="0" step="50" placeholder="Sans minimum"></div>
+<div class="field"><label for="maxPrice">Budget maximum (€)</label><input id="maxPrice" name="maxPrice" type="number" min="0" step="50" placeholder="Ex. 1500"></div>
+<div class="field full"><label for="keywords">Mots-clés complémentaires (facultatif)</label><input id="keywords" name="keywords" maxlength="120" placeholder="Ex. jardin, terrasse, garage, sans frais d’agence"></div>
+</div>
+<div class="actions"><button class="btn primary" id="submitBtn" type="submit">🔎 Rechercher les annonces</button><button class="btn secondary" type="reset">Réinitialiser</button></div>
+<p class="hint">Les résultats viennent d’un moteur de recherche externe. Le rayon, le prix et les caractéristiques peuvent être interprétés comme des mots-clés : vérifiez toujours les critères sur l’annonce originale.</p>
+</form>
+</section>
+<div id="status" class="status" role="status" aria-live="polite">Prêt à rechercher. Remplissez les critères puis cliquez sur « Rechercher les annonces ».</div>
+<div class="results-head"><h2>Résultats de recherche</h2><span class="count" id="count">Aucune recherche effectuée</span></div>
+<div id="results" class="cards"><div class="empty"><strong>Vos annonces apparaîtront ici</strong>Les liens pointeront vers les pages originales des annonces ou des résultats du site source.</div></div>
+<footer><p><strong>Recherche Immo by Chris</strong> est un outil indépendant et n’est affilié à aucun portail immobilier. Les titres, extraits et liens sont fournis par le moteur de recherche et peuvent être incomplets ou périmés. Nous ne garantissons ni la disponibilité d’un bien, ni l’exhaustivité des annonces. Aucun compte utilisateur n’est nécessaire.</p></footer>
+</main>
+<script>
+const form = document.getElementById('searchForm');
+const statusBox = document.getElementById('status');
+const resultsBox = document.getElementById('results');
+const countBox = document.getElementById('count');
+const submitBtn = document.getElementById('submitBtn');
+const sourceNames = {'leboncoin.fr':'Leboncoin','seloger.com':'SeLoger','pap.fr':'PAP','bienici.com':'Bien’ici','logic-immo.com':'Logic-Immo','figaro immobilier':'Figaro Immobilier','orpi.com':'Orpi','century21.fr':'Century 21','laforet.com':'Laforêt','iadfrance.fr':'iad France','green-acres.fr':'Green-Acres','ouestfrance-immo.com':'OuestFrance-Immo','immobilier.notaires.fr':'Immobilier.notaires.fr'};
+function sourceName(url){try{const h=new URL(url).hostname.replace(/^www\./,'');for(const [k,v] of Object.entries(sourceNames)){if(h.includes(k.split(' ')[0]))return v;}return h;}catch{return 'Site source';}}
+function money(n){return n ? Number(n).toLocaleString('fr-FR')+' €' : '';}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function makeCard(item){const url=String(item.link||'');if(!/^https?:\/\//i.test(url))return '';const host=sourceName(url);return `<article class="result"><h3><a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(item.title||'Annonce immobilière')}</a></h3><div class="meta">${host?`<span class="pill">${esc(host)}</span>`:''}${item.date?`<span class="pill">${esc(item.date)}</span>`:''}</div><p class="snippet">${esc(item.snippet||'Aucun descriptif fourni par le moteur de recherche.')}</p><div class="result-foot"><span class="source">${esc(new URL(url).hostname.replace(/^www\./,''))}</span><a class="open" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Voir la source ↗</a></div></article>`;}
+form.addEventListener('submit',async e=>{
+ e.preventDefault();
+ const fd=new FormData(form);const payload=Object.fromEntries(fd.entries());
+ payload.transaction=document.querySelector('input[name="transaction"]:checked').value;
+ statusBox.className='status';statusBox.textContent='Recherche en cours sur les sources disponibles…';
+ countBox.textContent='Recherche en cours';resultsBox.innerHTML='';submitBtn.disabled=true;submitBtn.textContent='Recherche…';
+ try{
+   const r=await fetch('/api/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+   const data=await r.json().catch(()=>({error:'Réponse serveur illisible.'}));
+   if(!r.ok)throw new Error(data.error||`Erreur serveur (${r.status}).`);
+   const items=Array.isArray(data.results)?data.results:[];
+   const cards=items.map(makeCard).filter(Boolean);
+   countBox.textContent=`${cards.length} résultat${cards.length>1?'s':''} retourné${cards.length>1?'s':''} par le moteur`;
+   if(cards.length){resultsBox.innerHTML=cards.join('');statusBox.textContent=`Recherche terminée. ${cards.length} résultat(s) reçus. Vérifiez les détails et la disponibilité sur chaque site source.`;}
+   else{resultsBox.innerHTML='<div class="empty"><strong>Aucun résultat exploitable reçu</strong>Essayez d’élargir la recherche ou de modifier les mots-clés. Cela ne signifie pas qu’il n’existe aucune annonce.</div>';statusBox.textContent='La recherche a abouti, mais aucun résultat exploitable n’a été renvoyé.';}
+   if(data.notice){const p=document.createElement('p');p.className='hint';p.textContent=data.notice;resultsBox.prepend(p);}
+ }catch(err){
+   statusBox.className='status error';statusBox.textContent=err.message||'Impossible de lancer la recherche.';
+   countBox.textContent='Résultats indisponibles';
+   resultsBox.innerHTML='<div class="empty"><strong>La recherche automatique n’est pas configurée ou le service est momentanément indisponible.</strong>Vérifiez que la clé API est bien configurée dans Vercel, puis redéployez le site.</div>';
+ }finally{submitBtn.disabled=false;submitBtn.textContent='🔎 Rechercher les annonces';}
+});
+form.addEventListener('reset',()=>{setTimeout(()=>{statusBox.className='status';statusBox.textContent='Critères réinitialisés. Vous pouvez lancer une nouvelle recherche.';countBox.textContent='Aucune recherche effectuée';resultsBox.innerHTML='<div class="empty"><strong>Vos annonces apparaîtront ici</strong>Lancez une recherche pour afficher les résultats.</div>';},0);});
+</script>
+</body>
+</html>
